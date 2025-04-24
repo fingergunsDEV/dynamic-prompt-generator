@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Prompt Generator</title>
+
+    <script src="https://cdn.tailwindcss.com?plugins=forms"></script>
+
+    <script type="importmap">
+    {
+        "imports": {
+            "@material/web/": "https://esm.run/@material/web/",
+            "lit": "https://esm.run/lit@3.1.3",
+            "lit/directives/style-map.js": "https://esm.run/lit@3.1.3/directives/style-map.js",
+            "@lit/reactive-element": "https://esm.run/@lit/reactive-element@2.0.4",
+            "tslib": "https://esm.run/tslib@2.6.2"
+        }
+    }
+    </script>
+    <script type="module" src="https://esm.run/@material/web/select/outlined-select.js"></script>
+    <script type="module" src="https://esm.run/@material/web/select/select-option.js"></script>
+    <script type="module" src="https://esm.run/@material/web/textfield/outlined-text-field.js"></script>
+    <script type="module" src="https://esm.run/@material/web/button/filled-button.js"></script>
+    <script type="module" src="https://esm.run/@material/web/divider/divider.js"></script>
+
+    <style>
+        /* Ensure body takes full height and center content */
+        html, body {
+            height: 100%;
+            margin: 0;
+            font-family: 'Roboto', sans-serif; /* Default Material Font */
+        }
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start; /* Align top */
+            padding-top: 2rem; /* Add some padding at the top */
+            background-color: #f8f9fa; /* Light background */
+        }
+        /* Ensure Material Text Fields take full width within their container */
+        md-outlined-text-field {
+            width: 100%;
+        }
+        /* Style for the generated prompt output */
+        #promptOutput {
+             white-space: pre-wrap; /* Preserve whitespace and wrap */
+             word-wrap: break-word; /* Break long words */
+             font-family: monospace; /* Use monospace for prompts */
+             min-height: 150px; /* Give it some initial height */
+        }
+    </style>
+</head>
+<body class="bg-surface-container-lowest text-on-surface">
+
+    <main class="w-full max-w-2xl p-6 md:p-8 bg-surface rounded-xl shadow-lg space-y-6">
+        <h1 class="text-2xl font-medium text-on-surface mb-4 text-center">Dynamic Prompt Generator</h1>
+
+        <section>
+            <md-outlined-select label="Select Prompt Template" id="templateSelector" class="w-full" menu-positioning="fixed">
+                </md-outlined-select>
+        </section>
+
+        <md-divider></md-divider>
+
+        <section id="variableInputsContainer" class="space-y-4">
+            <p class="text-sm text-on-surface-variant text-center">Select a template to see variable fields.</p>
+            </section>
+
+        <md-divider></md-divider>
+
+        <section class="flex justify-center">
+            <md-filled-button id="generateBtn" trailing-icon>
+                Generate Prompt
+                <svg slot="icon" viewBox="0 0 48 48"><path d="M9.8 38.15 7 35.35 20.35 22 7 8.65 9.8 5.85 23.15 19.2 36.5 5.85 39.3 8.65 25.95 22 39.3 35.35 36.5 38.15 23.15 24.8Z"/></svg>
+            </md-filled-button>
+        </section>
+
+        <md-divider></md-divider>
+
+        <section>
+            <md-outlined-text-field
+                label="Generated Prompt"
+                type="textarea"
+                rows="8"
+                id="promptOutputContainer"
+                readonly
+                class="w-full" >
+                     <div slot="supporting-text" id="promptOutput">Your generated prompt will appear here...</div>
+            </md-outlined-text-field>
+
+        </section>
+
+        <footer class="text-center text-xs text-on-surface-variant mt-6">
+            Powered by Material Web & Tailwind CSS
+        </footer>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
